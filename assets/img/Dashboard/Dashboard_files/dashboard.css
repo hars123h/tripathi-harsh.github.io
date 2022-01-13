@@ -1,0 +1,27 @@
+/* .headertext {
+    display: inline-block;
+    width: 80%;
+    margin: auto;
+    width: flex;
+} */
+
+/* .headertext h2{
+    font-family : "Helvetica, sans-serif";
+    font-style: normal; 
+    line-height: 24px; 
+    text-align: justify; 
+    text-justify: inter-word;
+} */
+.headertext h2 {
+    font-family : "Helvetica, sans-serif";
+    font-style: normal; 
+    line-height: 24px; 
+    text-align: justify; 
+    text-justify: inter-word;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.headertext h2 span {
+    color : #3DCFD3;
+}

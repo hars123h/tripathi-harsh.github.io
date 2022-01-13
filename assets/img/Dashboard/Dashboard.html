@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:5000/dashboard -->
+<html lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Type" content="text/html> -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="./Dashboard_files/jquery-ui.css">
+    <!-- favicon loader -->
+    <link rel="shortcut icon" href="http://localhost:5000/static/favicon/mee6.png">
+    <!-- basic styling -->
+    <link rel="stylesheet" href="./Dashboard_files/main.css">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+
+
+    <link rel="stylesheet" href="./Dashboard_files/dfTable.css">
+    <link rel="stylesheet" href="./Dashboard_files/dfInput.css">
+    <link rel="stylesheet" href="./Dashboard_files/dashboard.css">
+
+    <script type="application/javascript" src="./Dashboard_files/dashboardRequests.js"></script>
+    <script type="application/javascript" src="./Dashboard_files/toggleRow.js"></script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="./Dashboard_files/nav.css">
+    <!-- <div class="navbar">
+        <ul>
+            <li>
+                <form action="http://localhost:5000/dashboard" method="GET">
+                    <a href="http://localhost:5000/dashboard#" onclick="$(this).parent().submit()"> Dashboard</a>
+                </form>
+            </li>
+            <li>
+                <form action="http://localhost:5000/NNSimulatorRedirect" method="GET">
+                    <a href="http://localhost:5000/dashboard#" onclick="$(this).parent().submit()"> Simulator</a>
+                </form>
+            </li>
+            <!-- <li>
+            <form action="/TutorialsRedirect" method="GET" >
+                <a href="#" onClick="$(this).parent().submit()"> Tutorials</a>
+            </form>
+        </li> -->
+            <!-- <li>
+            <form action="/myAccount" method="GET" >
+            <a href="#" onClick="$(this).parent().submit()"> My account</a>
+            </form>
+        </li>
+        <li>
+            <form action="/BugReportRedirect" method="GET" >
+                <a href="#" onClick="$(this).parent().submit()"> Bug report</a>
+            </form>
+        </li> -->
+            <!-- <li>
+                <form action="http://localhost:5000/contactRedirect" method="GET" id="logoutForm">
+                    <a href="http://localhost:5000/dashboard#" onclick="$(this).parent().submit()"> Contact</a>
+                </form>
+            </li>
+            <li>
+                <form action="http://localhost:5000/logout" method="GET" id="logoutForm">
+                    <a href="http://localhost:5000/dashboard#" onclick="$(this).parent().submit()"> Log out</a>
+                </form>
+            </li>
+        </ul>
+    </div>  -->
+    <nav>
+        <input id="nav-toggle" type="checkbox">
+        <div class="logo">MINZ<strong>CODE</strong></div>
+        <ul class="links">
+            <li><a href="#h">Home</a></li>
+            <li><a href="#">Simulator</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <!-- <li><a href="#projects">Contact</a></li> -->
+            <li><a href="#">Logout</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </label>
+    </nav>
+    <div class="content">
+        <div class="headertext">
+            <h2 class = "text-center">My <span>Files</span></h2>
+        </div>
+        <div class="myFilesWrapper" id="myFilesWrapper">
+
+            <table style="align-items: center;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="table-row">
+                        <td class="toggleButton">
+                            <div class="toggle-down">
+                                <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                            </div>
+                        </td>
+                        <!-- <td><strong class="frameTitle">AAPL_INTRADAY.csv</strong></td> -->
+                        <td>AAPL_INTRADAY.csv</td>
+                        <td>330.34 KB</td>
+                    </tr>
+                    <tr class="dfRowButtons" style="display:none">
+                        <td colspan="3">
+                            <div class="buttons-wrapper">
+                                <div class="button-wrapper">
+                                    <form id="openDataframeForm" action="http://localhost:5000/openDataframe"
+                                        method="POST" enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input type="hidden" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="120">
+                                        <button class="dfButton" type="submit" id="openDataframeButton"
+                                            name="openDataframeButton">Open</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="Download" action="http://localhost:5000/downloadDF" method="GET"
+                                        class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="120">
+                                        <button class="dfButton" type="submit" id="DownloadDataframeButton"
+                                            name="DownloadDataframeButton">Download</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="120Delete" action="http://localhost:5000/deleteDataframe" method="POST"
+                                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="120">
+                                    </form>
+                                    <button class="deleteDataframeButton" id="deleteDataframeButton"
+                                        name="deleteDataframeButton">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-row">
+                        <td class="toggleButton">
+                            <div class="toggle-down">
+                                <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                            </div>
+                        </td>
+                        <!-- <td><strong class="frameTitle">MSFT_INTRADAY.csv</strong></td> -->
+                        <td>MSFT_INTRADAY.csv</td>
+                        <td>371.7 KB</td>
+                    </tr>
+                    <tr class="dfRowButtons" style="display:none">
+                        <td colspan="3">
+                            <div class="buttons-wrapper">
+                                <div class="button-wrapper">
+                                    <form id="openDataframeForm" action="http://localhost:5000/openDataframe"
+                                        method="POST" enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input type="hidden" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="232">
+                                        <button class="dfButton" type="submit" id="openDataframeButton"
+                                            name="openDataframeButton">Open</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="Download" action="http://localhost:5000/downloadDF" method="GET"
+                                        class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="232">
+                                        <button class="dfButton" type="submit" id="DownloadDataframeButton"
+                                            name="DownloadDataframeButton">Download</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="232Delete" action="http://localhost:5000/deleteDataframe" method="POST"
+                                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="232">
+                                    </form>
+                                    <button class="deleteDataframeButton" id="deleteDataframeButton"
+                                        name="deleteDataframeButton">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-row">
+                        <td class="toggleButton">
+                            <div class="toggle-down">
+                                <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                            </div>
+                        </td>
+                        <td>MSFT_INTRADAY.csv</td>
+                        <td>371.7 KB</td>
+                    </tr>
+                    <tr class="dfRowButtons" style="display:none">
+                        <td colspan="3">
+                            <div class="buttons-wrapper">
+                                <div class="button-wrapper">
+                                    <form id="openDataframeForm" action="http://localhost:5000/openDataframe"
+                                        method="POST" enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input type="hidden" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="233">
+                                        <button class="dfButton" type="submit" id="openDataframeButton"
+                                            name="openDataframeButton">Open</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="Download" action="http://localhost:5000/downloadDF" method="GET"
+                                        class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="233">
+                                        <button class="dfButton" type="submit" id="DownloadDataframeButton"
+                                            name="DownloadDataframeButton">Download</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="233Delete" action="http://localhost:5000/deleteDataframe" method="POST"
+                                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="233">
+                                    </form>
+                                    <button class="deleteDataframeButton" id="deleteDataframeButton"
+                                        name="deleteDataframeButton">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-row">
+                        <td class="toggleButton">
+                            <div class="toggle-down">
+                                <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                            </div>
+                        </td>
+                        <td>MSFT_INTRADAY.csv</td>
+                        <td>371.7 KB</td>
+                    </tr>
+                    <tr class="dfRowButtons" style="display:none">
+                        <td colspan="3">
+                            <div class="buttons-wrapper">
+                                <div class="button-wrapper">
+                                    <form id="openDataframeForm" action="http://localhost:5000/openDataframe"
+                                        method="POST" enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input type="hidden" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="234">
+                                        <button class="dfButton" type="submit" id="openDataframeButton"
+                                            name="openDataframeButton">Open</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="Download" action="http://localhost:5000/downloadDF" method="GET"
+                                        class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="234">
+                                        <button class="dfButton" type="submit" id="DownloadDataframeButton"
+                                            name="DownloadDataframeButton">Download</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="234Delete" action="http://localhost:5000/deleteDataframe" method="POST"
+                                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="234">
+                                    </form>
+                                    <button class="deleteDataframeButton" id="deleteDataframeButton"
+                                        name="deleteDataframeButton">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-row">
+                        <td class="toggleButton">
+                            <div class="toggle-down">
+                                <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                            </div>
+                        </td>
+                        <td>AAPL_INTRADAY.csv</td>
+                        <td>371.7 KB</td>
+                    </tr>
+                    <tr class="dfRowButtons" style="display:none">
+                        <td colspan="3">
+                            <div class="buttons-wrapper">
+                                <div class="button-wrapper">
+                                    <form id="openDataframeForm" action="http://localhost:5000/openDataframe"
+                                        method="POST" enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input type="hidden" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="235">
+                                        <button class="dfButton" type="submit" id="openDataframeButton"
+                                            name="openDataframeButton">Open</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="Download" action="http://localhost:5000/downloadDF" method="GET"
+                                        class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="235">
+                                        <button class="dfButton" type="submit" id="DownloadDataframeButton"
+                                            name="DownloadDataframeButton">Download</button>
+                                    </form>
+                                </div>
+                                <div class="button-wrapper">
+                                    <form id="235Delete" action="http://localhost:5000/deleteDataframe" method="POST"
+                                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                                        <input hidden="" name="csrf_token"
+                                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                        <input hidden="" name="dfID" value="235">
+                                    </form>
+                                    <button class="deleteDataframeButton" id="deleteDataframeButton"
+                                        name="deleteDataframeButton">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <!-- reload scripts -->
+            <script type="application/javascript" src="./Dashboard_files/dashboardRequests.js"></script>
+            <script type="application/javascript" src="./Dashboard_files/toggleRow.js"></script>
+        </div>
+        <div class="dataframeInput">
+            <div class="dfInputFrame">
+                <div>
+                    <form method="POST" action="http://localhost:5000/import" class="dropzone dz-clickable" id="dropper"
+                        enctype="multipart/form-data" height="50px">
+                        <input type="hidden" name="csrf_token"
+                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                        <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                    </form>
+                </div>
+            </div>
+            <div class="dfInputFrame">
+                <div class="m-centre">
+                    <p class ="mb-5"><strong>Default datasets</strong></p>
+                    <select class="defaultDatasetsSelect" name="dfID" form="copyDefaultDataframeForm">
+    
+                        <option value="45">AMZN_INTRADAY.csv</option>
+    
+                        <option value="46">GOOG_INTRADAY.csv</option>
+    
+                        <option value="47">MSFT_INTRADAY.csv</option>
+    
+                        <option value="48">TSLA_INTRADAY.csv</option>
+    
+                        <option value="49">AAPL_INTRADAY.csv</option>
+    
+                        <option value="50">FB_INTRADAY.csv</option>
+    
+                        <option value="51">NFLX_INTRADAY.csv</option>
+    
+                    </select>
+                    <form id="copyDefaultDataframeForm" action="http://localhost:5000/copyDefault" method="POST"
+                        enctype="application/x-www-form-urlencoded" class="frameForm">
+                        <input type="hidden" name="csrf_token"
+                            value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                    </form>
+                    <button class="copyDefaultButton" id="copyDefaultButton">Copy</button>
+                </div>
+
+            </div>
+            <!-- reload when rendering -->
+            <script type="application/javascript" src="./Dashboard_files/dropzone.min.js"></script>
+
+            <link rel="stylesheet" href="./Dashboard_files/dropzone.min.css" type="text/css">
+
+            <style>
+                .dropzone {
+                    border: 2px dashed #0087F7;
+                    margin: 5%;
+                    min-height: 10px;
+                }
+            </style>
+
+            <script type="application/javascript">
+
+                Dropzone.options.dropper = {
+                    paramName: 'file',
+                    chunking: true,
+                    forceChunking: true,
+                    maxFilesize: 2048, // megabytes
+                    chunkSize: 1000000, // bytes
+                    init: function () {
+                        this.on('success', function (file, response) {
+                            $('#myFilesWrapper').html(file.xhr.response);
+                            this.removeAllFiles();
+                        });
+                    }
+                }
+            </script>
+            <script type="application/javascript" src="./Dashboard_files/dashboardRequests.js"></script>
+        </div>
+
+        <div class="headertext">
+            <h2 class = "text-center">My <span>Models</span></h2>
+            </div>
+        <div id="wrapper fadeInDown">
+            <div class="filesDisplay" id="modelsTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>targets</th>
+                            <th>accuracy</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="toggleButton">
+                                <div class="toggle-down">
+                                    <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                                </div>
+                            </td>
+                            <td>AAPL_INTRADAY Seq.</td>
+                            <td>
+                                <!-- TODO for loop here -->
+                                ["4. close-1"]
+                            </td>
+                            <td>
+                                MSE : 149091.0000000000
+                            </td>
+                        </tr>
+                        <tr class="dfRowButtons" style="display:none">
+                            <td colspan="4">
+                                <div class="dfButtons">
+                                    <div class="dfButton">
+                                        <form id="Download" action="http://localhost:5000/downloadModel" method="GET"
+                                            class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="dfID" value="13">
+                                            <button type="submit" class="DownloadDataframeButton"
+                                                id="DownloadDataframeButton"
+                                                name="DownloadDataframeButton">Download</button>
+                                        </form>
+                                    </div>
+                                    <div class="dfButton">
+                                        <form id="Delete" action="http://localhost:5000/deleteModel" method="POST"
+                                            enctype="application/x-www-form-urlencoded" class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="modelID" value="13">
+                                        </form>
+                                        <button class="deleteModelButton" id="deleteModelButton"
+                                            name="deleteModelButton">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="table-row">
+                            <td class="toggleButton">
+                                <div class="toggle-down">
+                                    <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                                </div>
+                            </td>
+                            <td> Seq.</td>
+                            <td>
+                                <!-- TODO for loop here -->
+                                ["4. close-1"]
+                            </td>
+                            <td>
+                                MSE : 23152600000000.0000000000
+                            </td>
+                        </tr>
+                        <tr class="dfRowButtons" style="display:none">
+                            <td colspan="4">
+                                <div class="dfButtons">
+                                    <div class="dfButton">
+                                        <form id="Download" action="http://localhost:5000/downloadModel" method="GET"
+                                            class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="dfID" value="14">
+                                            <button type="submit" class="DownloadDataframeButton"
+                                                id="DownloadDataframeButton"
+                                                name="DownloadDataframeButton">Download</button>
+                                        </form>
+                                    </div>
+                                    <div class="dfButton">
+                                        <form id="Delete" action="http://localhost:5000/deleteModel" method="POST"
+                                            enctype="application/x-www-form-urlencoded" class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="modelID" value="14">
+                                        </form>
+                                        <button class="deleteModelButton" id="deleteModelButton"
+                                            name="deleteModelButton">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="table-row">
+                            <td class="toggleButton">
+                                <div class="toggle-down">
+                                    <img class="arrow" width="30%" src="./Dashboard_files/arrow.png">
+                                </div>
+                            </td>
+                            <td> Seq.</td>
+                            <td>
+                                <!-- TODO for loop here -->
+                                ["4. close-1"]
+                            </td>
+                            <td>
+                                MSE : 1620830000000000.0000000000
+                            </td>
+                        </tr>
+                        <tr class="dfRowButtons" style="display:none">
+                            <td colspan="4">
+                                <div class="dfButtons">
+                                    <div class="dfButton">
+                                        <form id="Download" action="http://localhost:5000/downloadModel" method="GET"
+                                            class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="dfID" value="15">
+                                            <button type="submit" class="DownloadDataframeButton"
+                                                id="DownloadDataframeButton"
+                                                name="DownloadDataframeButton">Download</button>
+                                        </form>
+                                    </div>
+                                    <div class="dfButton">
+                                        <form id="Delete" action="http://localhost:5000/deleteModel" method="POST"
+                                            enctype="application/x-www-form-urlencoded" class="frameForm">
+                                            <input hidden="" name="csrf_token"
+                                                value="IjQzMzA0Yjk2YWVhMTZlYTQwNTlmNjhkYTEzMTE2OGVhMzU2MjA4MmEi.YCUmdw.-PQJOr5n_ywUrCsE3jf2LfAegdI">
+                                            <input hidden="" name="modelID" value="15">
+                                        </form>
+                                        <button class="deleteModelButton" id="deleteModelButton"
+                                            name="deleteModelButton">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- reload scripts -->
+                <script type="application/javascript" src="./Dashboard_files/dashboardRequests.js"></script>
+                <script type="application/javascript" src="./Dashboard_files/toggleRow.js"></script>
+            </div>
+        </div>
+        <div class="dataframeInput">
+            <form action="http://localhost:5000/NNBuilderRedirect" method="GET">
+                <button>Create new model</button>
+            </form>
+        </div>
+    </div>
+    <link rel="stylesheet" href="./Dashboard_files/footer.css">
+
+    <footer>
+
+        <div class="copyright">
+            © all rights reserved <a href="http://localhost:5000/bknaeps@gmail.com">bknaeps@gmail.com</a><br>
+        </div>
+    </footer>
+    <!-- <div class="footerWrap">
+        <div class="footer">
+            <div class="footerContent">
+                <p>© all rights reserved <a href="http://localhost:5000/bknaeps@gmail.com">bknaeps@gmail.com</a></p><br>
+            </div>
+        </div>
+    </div> -->
+
+    <input type="file" multiple="multiple" class="dz-hidden-input"
+     style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+
+    <!-- nav script -->
+    <script type="application/javascript" src="./Dashboard_files/dashboardRequests.js"></script>
+<!-- extra scripts -->
+    <script src="./Dashboard_files/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script src="./Dashboard_files/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="./Dashboard_files/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

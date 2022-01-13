@@ -1,0 +1,39 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.center {
+    height: 100%;
+    width: 80%;
+    /* margin: auto; */
+}
+
+.content {
+    margin-top:115px !important;
+    width: 80%;
+    margin: auto;
+}
+
+.navbar  {
+    margin-bottom: 2%;
+    display: inline-block;
+}
+
+@media (max-width:768px) {
+    .content {
+        width: 90%;
+    }
+    .dfInputFrame {
+        margin-right: 0 !important;
+    }
+}
+@media (max-width:550px) {
+    .content {
+        width: 98%;
+    }
+    
+    .headertext h2 {
+        font-size: 2rem !important;
+    }
+}
